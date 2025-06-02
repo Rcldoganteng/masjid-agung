@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Masjid Agung Karawang</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #004d00, #009933);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      padding: 2rem 1rem;
+      text-align: center;
+      background: rgba(0, 77, 0, 0.85);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    header img.logo {
+      max-width: 100px;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7));
+    }
+    header h1 {
+      font-weight: 600;
+      font-size: 2.8rem;
+      letter-spacing: 3px;
+      text-shadow: 2px 2px 6px black;
+    }
+    nav {
+      margin-top: 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      font-weight: 600;
+    }
+    nav ul li a {
+      color: #a6e3a1;
+      text-decoration: none;
+      font-size: 1.1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      box-shadow: 0 0 8px transparent;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      background-color: #a6e3a1;
+      color: #004d00;
+      box-shadow: 0 0 15px #a6e3a1;
+    }
+
+    main {
+      flex-grow: 1;
+      max-width: 900px;
+      margin: 3rem auto 4rem;
+      padding: 0 1rem;
+      background: rgba(255 255 255 / 0.1);
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      color: #e1f0d1;
+      backdrop-filter: blur(8px);
+    }
+
+    section {
+      display: none;
+      animation: fadeIn 0.7s ease forwards;
+    }
+    section.active {
+      display: block;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 3px #000;
+    }
+    h3 {
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+      color: #cdeac0;
+      border-left: 6px solid #a6e3a1;
+      padding-left: 0.8rem;
+      font-weight: 600;
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+    }
+    p {
+      line-height: 1.6;
+      font-weight: 400;
+      font-size: 1.1rem;
+    }
+
+    /* Home welcome banner */
+    .welcome-banner {
+      background: #006400cc;
+      padding: 2rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #004d00cc;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Prayer times table */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 400px;
+      margin-top: 1rem;
+      box-shadow: 0 0 10px #004d0022;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    thead tr {
+      background-color: #004d00cc;
+      color: #d7f5bf;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    th, td {
+      padding: 0.8rem 1.2rem;
+      border-bottom: 1px solid #00640088;
+      text-align: center;
+    }
+    tbody tr:nth-child(even) {
+      background: #0c3500aa;
+    }
+    tbody tr:hover {
+      background: #48a14dcc;
+      color: #0f2600;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    /* Info articles */
+    article {
+      background-color: #105610bb;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
+      box-shadow: inset 0 0 10px #1b5e20;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+    article:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px #2ca02ccc;
+    }
+    article h3 {
+      margin-bottom: 0.4rem;
+    }
+
+    /* Gallery grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+      gap: 15px;
+      margin-top: 1rem;
+    }
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 14px;
+      height: 120px;
+      object-fit: cover;
+      box-shadow: 0 4px 10px 0 #1b4c00b5;
+      transition: transform 0.25s ease;
+      cursor: pointer;
+    }
+    .gallery-grid img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 25px #00ff0077;
+      z-index: 2;
+    }
+
+    /* Contact section */
+    .contact-details a {
+      color: #b9f6ca;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .contact-details a:hover {
+      color: #d7ffcc;
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: #003300;
+      color: #a7d48d;
+      font-style: italic;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      font-size: 0.9rem;
+      box-shadow: inset 0 8px 24px #001700;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.9rem;
+      }
+      nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+      }
+      .gallery-grid img {
+        height: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="Masjid-Agung-Syekh-Quro-Karawang-28Juli.jpg" alt="Logo Masjid Ar-Rahman" class="logo" />
+    <h1>Masjid Agung Karawang</h1>
+    <nav aria-label="Navigasi utama">
+      <ul class="nav-list" role="menubar">
+        <li><a href="#" class="nav-link active" data-section="home" role="menuitem" aria-current="page">Beranda</a></li>
+        <li><a href="#" class="nav-link" data-section="jadwal" role="menuitem">Jadwal Shalat</a></li>
+        <li><a href="#" class="nav-link" data-section="info" role="menuitem">Informasi</a></li>
+        <li><a href="#" class="nav-link" data-section="galeri" role="menuitem">Galeri</a></li>
+        <li><a href="#" class="nav-link" data-section="kontak" role="menuitem">Kontak</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="section active" tabindex="0" aria-label="Beranda">
+      <div class="welcome-banner">Selamat Datang di Masjid Agung Syekh Quro, pusat ibadah dan kebersamaan umat.</div>
+      <h2>Tentang Masjid</h2>
+      <p>Masjid Agung Syekh Quro di Karawang, Jawa Barat, merupakan masjid tertua di Pulau Jawa, dibangun pada tahun 1418 Masehi. Masjid ini didirikan oleh Syekh Hasanudin bin Yusuf Sidik, yang dikenal sebagai Syekh Quro, seorang ulama yang menyebarkan Islam di Jawa Barat, khususnya di Karawang. Masjid ini terletak di Alun-alun Barat, Karawang Kulon, Kecamatan Karawang Barat. 
+    </p>
+        <h3>Sejarah masjid</h3>
+        <p>
+            Didirikan oleh Syekh Quro pada tahun 1418 Masehi.
+            Dikenal sebagai masjid tertua di Pulau Jawa.
+            Menjadi pusat penyebaran Islam di Karawang.
+            Syekh Quro adalah ulama yang menyebarkan Islam di Jawa Barat.  
+        </p>
+    </section>
+
+    <section id="jadwal" class="section" tabindex="0" aria-label="Jadwal Shalat">
+      <h2>Jadwal Shalat Hari Ini</h2>
+      <table aria-describedby="jadwal-desc">
+        <caption id="jadwal-desc" class="sr-only">Jadwal waktu shalat untuk hari ini</caption>
+        <thead>
+          <tr><th>Shalat</th><th>Waktu</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Subuh</td><td>04:35</td></tr>
+          <tr><td>Dzuhur</td><td>12:05</td></tr>
+          <tr><td>Ashar</td><td>15:20</td></tr>
+          <tr><td>Maghrib</td><td>18:00</td></tr>
+          <tr><td>Isya</td><td>19:20</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="info" class="section" tabindex="0" aria-label="Informasi dan Berita">
+      <h2>Informasi & Berita</h2>
+      <article>
+        <h3>Pengajian Rutin </h3>
+        <p>Pengajian Rutin: Masjid ini mengadakan pengajian rutin yang diisi oleh para kiai dan ulama setempat. Salah satu contohnya adalah pengajian bersama KH. Burhanudin Abdullah, M.Pd, yang pernah dilaksanakan di masjid ini .
+            
+            Tawasul Malam Jumat: Setiap malam Jumat, diadakan tawasul khusus di makam Syekh Quro, Syekh Abdurahman, dan para pengikutnya, serta bupati Karawang sebelumnya. Kegiatan ini menjadi bagian dari tradisi keagamaan yang dijaga oleh masyarakat setempat .
+            Karawang Mengaji: Pada tanggal 2 November 2023, Masjid Agung Syekh Quro menjadi lokasi acara "Karawang Mengaji" yang dihadiri oleh Bupati Karawang dan pejabat daerah lainnya, menunjukkan peran aktif masjid dalam kegiatan keagamaan tingkat kabupaten .
+            Fakta Jabar
+            
+            Tabligh Akbar: Dalam rangka menyambut Tahun Baru Islam 1 Muharram 1444 Hijriah, Pemerintah Kabupaten Karawang menggelar Tabligh Akbar di Masjid Agung Syekh Quro, menandakan peran masjid sebagai pusat kegiatan keagamaan skala besar </p>
+      </article>
+    
+    </section>
+
+    <section id="galeri" class="section" tabindex="0" aria-label="Galeri Kegiatan Masjid">
+      <h2>Galeri Foto</h2>
+      <div class="gallery-grid" role="list">
+        <img src="images (1).jpeg" alt="" role="listitem">
+        <img src="images.jpeg" alt="" role="listitem">
+        <img src="Masjid-Agung-Syekh-Quro-Karawang-28Juli.jpg" alt="" role="listitem">
+        <img src="unnamed (1).webp" alt="" role="listitem">
+        <img src="unnamed.webp" alt="" role="listitem">
+      </div>
+    </section>
+
+    <section id="kontak" class="section" tabindex="0" aria-label="Kontak Masjid">
+      <h2>Hubungi Kami</h2>
+      <div class="contact-details">
+        <p>Alamat: Jl. Demak No.5, Semarang</p>
+        <p>Telepon: (024) 765-4321</p>
+        <p>Email: <a href="mailto:info@masjid-arrahman.id">info@masjid-arrahman.id</a></p>
+        <p><a href="https://www.google.com/maps?q=Jl.+Demak+No.5,+Semarang" target="_blank" rel="noopener">Lihat Lokasi di Google Maps</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2024 Masjid Ar-Rahman. Beribadah dengan Hati dan Semangat.
+  </footer>
+
+  <script>
+    const links = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.section');
+
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = link.dataset.section;
+
+        links.forEach(l => {
+          l.classList.toggle('active', l === link);
+        });
+
+        sections.forEach(section => {
+          section.classList.toggle('active', section.id === target);
+          if(section.id === target) {
+            section.focus();
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
